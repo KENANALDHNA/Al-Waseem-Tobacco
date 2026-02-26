@@ -1,0 +1,130 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Noto+Sans+Arabic:wght@400;500;700&family=JetBrains+Mono:wght@400;500&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Noto Sans Arabic", "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+  
+  /* Override default oklch colors with hex for html2canvas compatibility */
+  --color-zinc-50: #fafafa;
+  --color-zinc-100: #f4f4f5;
+  --color-zinc-200: #e4e4e7;
+  --color-zinc-300: #d4d4d8;
+  --color-zinc-400: #a1a1aa;
+  --color-zinc-500: #71717a;
+  --color-zinc-600: #52525b;
+  --color-zinc-700: #3f3f46;
+  --color-zinc-800: #27272a;
+  --color-zinc-900: #18181b;
+  
+  --color-emerald-50: #ecfdf5;
+  --color-emerald-500: #10b981;
+  --color-emerald-600: #059669;
+  
+  --color-red-50: #fef2f2;
+  --color-red-400: #f87171;
+  --color-red-600: #dc2626;
+  
+  --color-blue-400: #60a5fa;
+  
+  --color-white: #ffffff;
+  --color-black: #000000;
+  --color-transparent: transparent;
+}
+
+:root {
+  --bg: #F8F9FA;
+  --ink: #1A1A1A;
+  --line: #E5E7EB;
+  --accent: #10B981;
+  --app-font-size: 14px;
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  font-size: var(--app-font-size);
+}
+
+@media print {
+  @page {
+    margin: 0;
+    size: 80mm auto;
+  }
+  body {
+    background: white !important;
+    color: black !important;
+    width: 78mm;
+    margin: 0 auto;
+    padding: 5mm;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+    font-size: var(--app-font-size) !important;
+  }
+  .print\:hidden {
+    display: none !important;
+  }
+  #main-table, .export-table {
+    width: 100% !important;
+    border: 1px solid #000 !important;
+    border-collapse: collapse !important;
+  }
+  th, td {
+    border: 1px solid #000 !important;
+    color: black !important;
+    background: transparent !important;
+    padding: 4px !important;
+    font-size: inherit !important;
+  }
+  /* Thermal printer optimization: high contrast */
+  * {
+    filter: grayscale(100%) contrast(150%) !important;
+  }
+}
+
+.data-grid-header {
+  @apply bg-zinc-900 text-white font-bold uppercase tracking-wider py-3 px-4 text-center border-l border-zinc-700;
+  font-size: var(--app-font-size);
+}
+
+.data-grid-cell {
+  @apply py-3 px-4 border-b border-zinc-200 text-center align-middle;
+  font-size: var(--app-font-size);
+}
+
+.category-header-row {
+  @apply bg-zinc-100 border-b-2 border-zinc-900 py-3 px-4;
+}
+
+.category-header-text {
+  @apply text-sm font-black text-zinc-900 uppercase tracking-widest flex items-center gap-3;
+}
+
+.category-header-indicator {
+  @apply w-1.5 h-6 bg-emerald-600 rounded-full;
+}
+
+.data-grid-row {
+  @apply transition-colors hover:bg-zinc-50;
+}
+
+/* RTL Specifics */
+[dir="rtl"] .data-grid-header:first-child {
+  @apply border-r-0;
+}
+
+[dir="rtl"] .data-grid-header:last-child {
+  @apply border-l-0;
+}
+
+/* Hide number input spinners */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type=number] {
+  -moz-appearance: textfield;
+}
